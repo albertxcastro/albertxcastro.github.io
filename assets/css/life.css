@@ -1,0 +1,43 @@
+table {
+    background-color: #000000;
+    border-spacing: 0;
+}
+
+td {
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+    width: 10px;
+    height: 10px;
+}
+
+span {
+    color: rgb(0, 0, 0);
+}
+
+#start,
+#clear,
+#random {
+    padding: .75em;
+    border-radius: 5px;
+    border: none;    
+    background: linear-gradient(
+        to bottom right,
+        #C5DEC6, #587559);
+}
+
+td.dead {
+    background-color: transparent;
+}
+
+td.live {
+    background-color: #26ff00;
+}
+
+#gridContainer {
+    cursor: crosshair;
+}
+
+#gameDescription {
+    background-color: #000000;
+    color: #26ff00;
+}
