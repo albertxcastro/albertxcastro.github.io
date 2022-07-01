@@ -2210,9 +2210,15 @@ input, select, textarea {
 			border-radius: 0;
 		}
 
-			.image.main img {
-				border-radius: 0;
-			}
+		.image.main img {
+			border-radius: 0;
+		}
+
+		.image-icon.left {
+			float: left;
+			margin: 0 0.5em 2em 0;
+			top: 0.25em;
+		}
 
 /* List */
 
@@ -3320,3 +3326,7 @@ input, select, textarea {
 			}
 
 	}
+
+.text.left {
+	margin: 0em 0em 0em 3.5em;
+}
