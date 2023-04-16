@@ -9,7 +9,4 @@ function showOrHide() {
         btn.innerHTML = "Show more";
     }
   }
-
-function showMsc() {
-    location.replace("https://stopify.co/IE1WDC")
-}
+  
