@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Clustering</h3>
+		<p>
+			Clustering is a technique in data mining and machine learning that involves grouping together similar data points based on their inherent 
+			similarities or patterns. It is an unsupervised learning method that seeks to identify natural groupings or clusters within a dataset without 
+			any predefined labels or categories.
+			<br>
+			In clustering, data points that are similar to each other are grouped together, while those that are dissimilar are placed in different groups. 
+			The goal is to create meaningful and homogeneous clusters of data points based on their similarities, which can then be used for various purposes, 
+			such as data analysis, pattern recognition, anomaly detection, and recommendation systems (Jain, 1999).
+		</p>
+
+		<h4>K-Means clustering</h4>
+		<p>
+			K-means is a popular clustering algorithm in machine learning that aims to partition a dataset into k number of non-overlapping clusters based on 
+			the similarity of data points. It is an unsupervised learning method that assigns each data point to one of the k clusters based on the distance 
+			between the data point and the centroid of each cluster.<br><br>
+			The k-means algorithm starts with randomly initializing k centroids, which are the center points of the initial clusters. Then, it iteratively assigns each 
+			data point to the nearest centroid and updates the centroids by taking the mean of the data points within each cluster. This process is repeated until 
+			convergence, which is typically determined by a predefined number of iterations or when the centroids do not change significantly.
+			<br><br>
+			It is sensitive to the initial placement of centroids and can sometimes converge to suboptimal solutions. Therefore, it is common to run the k-means algorithm 
+			multiple times with different initializations and choose the best clustering result based on a predefined evaluation metric.
+		</p>
+
+		<h4>The elbow method</h4>
+
+		<p>
+			The elbow method is a graphical approach used in clustering to determine the optimal number of clusters (k) to use in a k-means clustering 
+			algorithm. It involves plotting the variance or the sum of squared distances (SSD) of the data points within each cluster against the number of 
+			clusters (k), and identifying the "elbow point" on the plot where the variance or SSD starts to level off (Ketchen, 1996).<br><br>
+
+			The intuition behind the elbow method is that as the number of clusters increases, the variance or SSD within each cluster tends to decrease, 
+			as each data point is assigned to a more specific cluster. However, adding too many clusters can result in overfitting, where each cluster becomes 
+			too small and the clustering solution becomes overly complex. On the other hand, if the number of clusters is too low, the variance or SSD within 
+			each cluster may be high, resulting in poor clustering performance.<br><br>
+
+			By looking for the elbow point on the plot of variance or SSD versus the number of clusters, the elbow method helps to identify a reasonable value 
+			for k, where the decrease in variance or SSD levels off and adding more clusters does not significantly improve the clustering performance. The 
+			elbow point is often considered as the optimal number of clusters to use in the k-means algorithm for a given dataset.
+		</p>
+		<br>
+
+		<figure>
+			<code>
+				<span class="keyword">data</span> = <span class="keyword">zip</span>(mdf['latitude'], mdf['longitude']))<br>
+				<span class="keyword">max_k</span> = <span class="keyword">len</span>(data)<br>
+				scores = []<br>
+				<br>
+				<span class="keyword">for</span> i in <span class="keyword">range</span>(1,20):<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;kmeans = KMeans(n_clusters=i)<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;kmeans.fit(data)<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;scores.append(kmeans.inertia_)<br>
+					<br>
+				plt.plot(range(1,20), scores, marker='o')<br>
+				plt.title('Elbow method')<br>
+				plt.xlabel('Number of clusters')<br>
+				plt.ylabel('Score')<br>
+			</code>
+			<figcaption class="image-caption">Code use the elbow technique. Code taken from the team assignment in Unit 6.</figcaption>
+        </figure>
+
+		<figure>
+			<img src="../../images/ML/images/elobow.png" alt="The elbow technique"/>
+			<figcaption class="image-caption">The elbow techinque</figcaption>
+		</figure>
+
+		In the plot above, we observe that k = 2 is a proper number of clusters.<br><br>
+
+		<h4>K-Means in python</h4>
+
+		<br><br>
+		<figure>
+			<code class="my-code">
+				kmeans = KMeans(n_clusters=2)<br>
+				ndata = mdf.copy()<br>
+				ndata[<span class="string">"cluster"</span>] = kmeans.fit_predict(ndata[["latitude", "longitude", "price"]])<br>
+				centroids = kmeans.cluster_centers_<br>
+				labels = kmeans.labels_<br>
+				colors = ["g","r",]<br>
+				<br>
+				plt.scatter(<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;ndata[<span class="string">"latitude"</span>],<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;ndata[<span class="string">"longitude"</span>],<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;ndata[<span class="string">"price"</span>],<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;color=[colors[l_] for l_ in labels],<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;label=labels,<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;alpha = 0.1<br>
+				)<br>
+				plt.scatter(<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;centroids[:, 0],<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;centroids[:, 1],<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;color=<span class="string">"y"</span>,<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;marker = <span class="string">"x"</span>,<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;s=500,<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;linewidths = 3,<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;zorder = 10<br>
+				)<br>
+				ndata[["latitude", "longitude", "price", "cluster"]].head(20)
+			</code>
+			Output:
+			<table>
+				<tr>
+				  <th>latitude</th>
+				  <th>longitude</th>
+				  <th>price</th>
+				  <th>cluster</th>
+				</tr>
+				<tr>
+				  <td>40.75362</td>
+				  <td>-73.98377</td>
+				  <td>225</td>
+				  <td>1</td>
+				</tr>
+				<tr>
+				  <td>40.79851</td>
+				  <td>-73.94399</td>
+				  <td>80</td>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <td>40.74767</td>
+				  <td>-73.97500</td>
+				  <td>200</td>
+				  <td>1</td>
+				</tr>
+				<tr>
+				  <td>40.71344</td>
+				  <td>-73.99037</td>
+				  <td>150</td>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <td>40.80316</td>
+				  <td>-73.96545</td>
+				  <td>135</td>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <td>40.73530</td>
+				  <td>-74.00525</td>
+				  <td>120</td>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <td>40.79685</td>
+				  <td>-73.94872</td>
+				  <td>190</td>
+				  <td>1</td>
+				</tr>
+				<tr>
+				  <td>40.76715</td>
+				  <td>-73.98533</td>
+				  <td>150</td>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <td>40.72920</td>
+				  <td>-73.98542</td>
+				  <td>180</td>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <td>40.81175</td>
+				  <td>-73.94478</td>
+				  <td>150</td>
+				  <td>0</td>
+				</tr>
+			</table>
+			<figcaption class="image-caption">Code to cluster locations by price. Code taken from the team assignment in Unit 6.</figcaption>
+        </figure>
+
+		<figure>
+			<img src="../../images/ML/images/clustering.png" alt="Clustered locations by price"/>
+			<figcaption class="image-caption">Clustered locations by price.</figcaption>
+		</figure>
+
+		The two clusters are:
+		<ul>
+			<li>Red (Cluster 0): expensive areas.</li>
+			<li>Green (Cluster 1): low-priced areas.</li>
+		</ul>
+
+		<br><br>
+		References:
+		<code>
+			Jain, A. K., Murty, M. N., & Flynn, P. J. (1999). Data clustering: a review. ACM Computing Surveys, 31(3), 264-323<br><br>
+			Han, J., Kamber, M., & Pei, J. (2011). Data mining: concepts and techniques. Morgan Kaufmann.<br><br>
+			Ketchen, D. J., & Shook, C. L. (1996). The application of cluster analysis in strategic management research: an analysis and critique. Strategic Management Journal, 17(6), 441-458.
+		</code>
+    </body>
+</html>
+
