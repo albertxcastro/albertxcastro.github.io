@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Polynomial regression</h3>
+		<p>
+			Polynomial regression is a type of regression analysis that models the relationship between an independent 
+			variable and a dependent variable with a polynomial function. It extends the concept of linear regression 
+			by allowing for nonlinear relationships between variables, using polynomial terms of different orders 
+			(e.g., quadratic, cubic, etc.) in the regression equation (Hastie et. al., 2009).
+		</p>
+
+		<h4>Polynomial regression in Python</h4>
+
+		The following is an example of how multiple linear regression works in Python. It was taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex4%20polynomial_regression.ipynb">this jupyter notebook</a> in Unit 3.
+		<br>
+		In the example, we have a set of 18 cars passing a certain tollbooth at different time of the day (x) with different speed (y).
+		<figure>
+			<code>
+				<span class="keyword">import</span> numpy<br>
+				<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt<br>
+				<br>
+				x = [1,2,3,5,6,7,8,9,10,12,13,14,15,16,18,19,21,22]<br>
+				y = [100,90,80,60,60,55,60,65,70,70,75,76,78,79,90,99,99,100]<br>
+				<br>
+				<span class="comment">#NumPy has a method that lets us make a polynomial model</span><br>
+				mymodel = numpy.poly1d(numpy.polyfit(x, y, 3))<br>
+				<br>
+				<span class="comment">#specify how the line will display, we start at position 1, and end at position 22</span><br>
+				myline = numpy.linspace(1, 22, 100)<br>
+				<br>
+				plt.scatter(x, y)<br>
+				plt.plot(myline, mymodel(myline))<br>
+				plt.show()
+			</code>
+			<figcaption class="image-caption">Code to calculate polynomial regression. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex4%20polynomial_regression.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+        </figure>
+
+		<figure>
+			<img src="../../images/ML/images/polynomial_regression.png" alt="Polynomial regression function"/>
+			<figcaption class="image-caption">The Polynomial regression function</figcaption>
+		</figure>
+
+		Now, let's find how well the model can make predictions. To know this, we need to see the r-squared value. The R-squared value, also known as 
+		the coefficient of determination, is a statistical measure that indicates the proportion of the variance in the dependent variable that is 
+		explained by the independent variables in a regression model, including polynomial regression. It is a value between 0 and 1, with 0 
+		indicating that the model explains none of the variance and 1 indicating that the model explains all of the variance (WallStreetMojo).
+		<br><br>
+		<figure>
+			<code>
+				<span class="keyword">import</span> numpy<br>
+				<span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score<br>
+				<br>
+				x = [1,2,3,5,6,7,8,9,10,12,13,14,15,16,18,19,21,22]<br>
+				y = [100,90,80,60,60,55,60,65,70,70,75,76,78,79,90,99,99,100]<br>
+				<br>
+				mymodel = numpy.poly1d(numpy.polyfit(x, y, 3))<br>
+				<br>
+				print(r2_score(y, mymodel(x)))<br>
+			  </code>	
+			  Output:
+			  <code>
+				0.9432150416451027		  
+			  </code>
+			  
+			<figcaption class="image-caption">Code to calculate the r-squared value. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex4%20polynomial_regression.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+        </figure>
+
+		<h5>Predicting a future value</h5>
+		Now, let's try to predict the speed of a car that passes the tollbooth at 17 P.M.
+
+		<figure>
+			<code>
+				<span class="keyword">import</span> numpy
+				<span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score
+			  
+				x = [1,2,3,5,6,7,8,9,10,12,13,14,15,16,18,19,21,22]
+				y = [100,90,80,60,60,55,60,65,70,70,75,76,78,79,90,99,99,100]
+			  
+				mymodel = numpy.poly1d(numpy.polyfit(x, y, 3))
+			  
+				speed = mymodel(17)
+				print(speed)
+			  </code>			  
+			  Output:
+			  <code>
+				88.87331269697978
+			  </code>
+			<figcaption class="image-caption">Code to predict the speed of a car that passes the tollbooth at 17 P.M. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex4%20polynomial_regression.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+        </figure>
+
+		<figure>
+			<img src="../../images/ML/images/polynomial_regression_prediction.png" alt="Polynomial regression function"/>
+			<figcaption class="image-caption">Making a prediction using polynomial regression</figcaption>
+		</figure>
+
+		<br><br>
+		References:
+		<code>
+			Hastie, T., Tibshirani, R., & Friedman, J. (2009). The elements of statistical learning: data mining, inference, and prediction. Springer.<br><br>
+			WallStreetMojo (n.d.). R-squared. WallStreetMojo. Available at: https://www.wallstreetmojo.com/r-squared/ (Accessed: 15/04/2023).
+		</code>
+    </body>
+</html>
+

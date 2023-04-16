@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Multiple linear regression</h3>
+		<p>
+			Multiple linear regression is a statistical technique used to model the relationship between two or more independent variables 
+			and a single dependent variable, by fitting a linear equation to observed data. It extends the concept of simple linear regression, 
+			which models the relationship between two variables, to include multiple predictors, allowing for the analysis of more complex 
+			relationships among variables (Hair, Black, Babin, & Anderson, 2014).
+			<code>
+				y = b0 + b1x1 + b2x2 + ... + bnxn + ε
+			</code>
+			<br>
+			Where:
+			<ul>
+                <li><strong>y</strong> is the predicted value of the dependent variable.</li>
+                <li><strong>b0</strong> is the intercept (also known as the constant or the <strong>y-intercept</strong>)</li>
+                <li><strong>b1, b2, ..., bn</strong> are the regression coefficients for the respective independent variables <strong>x1, x2, ..., xn.</strong></li>
+                <li><strong>x1, x2, ..., xn</strong> are the independent variables.</li>
+                <li><strong>ε</strong> is the error term that represents the random variation in the dependent variable that is not explained by the independent variables (Hair et al., 2014).</li>
+            </ul>
+		</p>
+
+		<h4>Multiple linear regression in Python</h4>
+
+		The following is an example of how multiple linear regression works in Python. It was taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex3%20multiple_linear_regression.ipynb">this jupyter notebook</a> in Unit 3.
+		<figure>
+			<code>
+				<span class="keyword">import</span> pandas<br>
+					<span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model<br>
+					<br>
+					df = pandas.read_csv("cars.csv")
+					<br>
+					X = df[['Weight', 'Volume']]<br>
+					y = df['CO2']<br>
+					<br>
+					regr = linear_model.LinearRegression()<br>
+					regr.fit(X, y)<br>
+					<br>
+					<span class="comment">#predict the CO2 emission of a car where the weight is 2300kg, and the volume is 1300cm3:</span><br>
+					predictedCO2 = regr.predict([[2300, 1300]])<br>
+					<br>
+				<span class="keyword">print</span>(predictedCO2)
+			</code>
+			Output:
+			<code>
+				[107.2087328]
+			</code>
+			<figcaption class="image-caption">Code to calculate multiple linear regression. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex3%20multiple_linear_regression.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+        </figure>
+		<br><br>
+		References:
+		<code>
+			Hair, J. F., Black, W. C., Babin, B. J., & Anderson, R. E. (2014). Multivariate data analysis (7th ed.). Upper Saddle River, NJ: Pearson.
+		</code>
+    </body>
+</html>
+

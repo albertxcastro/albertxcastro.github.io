@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Linear regression</h3>
+		<p>
+			Linear regression is a statistical method used to model the relationship between two variables by fitting a 
+			linear equation to observed data points, with the goal of predicting the value of one variable (the dependent variable) based on the 
+			value of another variable (the independent variable) (Montgomery et. at., 2012). The linear equation is typically represented as:
+			<code>
+				y = mx + b
+			</code>
+			<br>
+			Where:
+			<ul>
+                <li><strong>y</strong> is the predicted value of the dependent variable.</li>
+                <li><strong>m</strong> is the slope of the regression function.</li>
+                <li><strong>x</strong> is the independent variable.</li>
+                <li><strong>b</strong> is the <strong>y-intercept</strong> value. This is the value of <strong>y</strong> when <strong>x</strong> is equal to <strong>0</strong>.</li>
+            </ul>
+		</p>
+
+		<h4>Simple linear regression in Python</h4>
+
+		The following is an example of how linear regression works in Python. It was taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex2%20linear_regression.ipynb">this jupyter notebook</a> in Unit 3.
+		<figure>
+			<code class="code">
+				<span class="comment">#Create the arrays that represent the values of the x and y axis</span><br>
+				<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt<br>
+				<span class="keyword">from</span> scipy <span class="keyword">import</span> stats<br><br>
+			
+				x = [5,7,8,7,2,17,2,9,4,11,12,9,6]<br>
+				y = [99,86,87,88,111,86,103,87,94,78,77,85,86]<br>
+				<br>
+				<span class="comment">#Execute a method that returns some important key values of Linear Regression</span><br>
+				slope, intercept, r, p, std_err = stat.linregress(x, y)<br>
+				<br>
+				<span class="comment"># measure the correlation</span><br>
+				corr, _ = stat.pearsonr(x, y)<br>
+				print(<span class="string">'Pearsons correlation: %.3f' % corr</span>)<br>
+				<br>
+				<span class="comment">#Create a function that uses the slope and intercept values to return a new value.</span><br>
+				<span class="comment">#This new value represents where on the y-axis the corresponding x value will be placed</span><br>
+				def myfunc(x):<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> slope * x + intercept<br>
+				  <br>
+				<span class="comment">#Run each value of the x array through the function. This will result in a new array with new values for the y-axis</span><br>
+				mymodel = list(map(myfunc, x))<br>
+				<br>
+				<span class="comment">#Draw the original scatter plot & the line of linear regression</span><br>
+				plt.scatter(x, y)<br>
+				plt.plot(x, mymodel)<br>
+				plt.show()<br>
+			</code>
+			Output:
+			<code>
+				Pearsons correlation: -0.759
+			</code>
+			<figcaption class="image-caption">Code to calculate simple linear regression. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex2%20linear_regression.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+        </figure>
+
+		<figure>
+			<img src="../../images/ML/images/regression.png" alt="Regression"/>
+			<figcaption class="image-caption">Simple linnear regression line.</figcaption>
+		</figure>
+	
+
+		<h5>Predicting a unseen value</h5>
+
+		The following snipet of code shows how to get a prediction based on an unseen value. It was taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex2%20linear_regression.ipynb">this jupyter notebook</a> in Unit 3.
+
+		<figure>
+			<code>
+				<span class="keyword">from</span> scipy <span class="keyword">import</span> stats<br>
+				<br>
+				x = [5,7,8,7,2,17,2,9,4,11,12,9,6]<br>
+				y = [99,86,87,88,111,86,103,87,94,78,77,85,86]<br>
+				<br>
+				slope, intercept, r, p, std_err = stats.linregress(x, y)<br>
+				<br>
+				<span class="keyword">def</span> myfunc(x):<br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> intercept + slope * x<br>
+				<br>
+				speed = myfunc(10)<br>
+				<br>
+				<span class="keyword">print</span>(<span class="string">f'Prediction:</span> { speed }<span class="string">'</span>)
+			  </code>
+			  Output:
+			  <code>
+				Prediction: 85.59308314937454
+			  </code>
+			<figcaption class="image-caption">Code to get a prediction from a regression model in Python. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex2%20linear_regression.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+        </figure>
+
+		<figure>
+			<img src="../../images/ML/images/regression_prediction.png" alt="Getting a prediction"/>
+			<figcaption class="image-caption">Predicting a value. If <strong>x = 10</strong> then predicted <strong>y</strong> is <strong>85.59</strong></figcaption>
+		</figure>
+
+		<br><br>
+		References:
+		<code>
+			Montgomery, D.C., Peck, E.A., & Vining, G.G. (2012). Introduction to Linear Regression Analysis. John Wiley & Sons.
+		</code>
+    </body>
+</html>
+

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Correlation and Regression</h3>
+        <p>
+            <h4>What is correlation?</h4>
+            Correlation is the mathematical statistic for a population that provides us with a measurement of the strength of a linear relationship between two variables. 
+            <br><br>
+
+            <h4>What is the correlation coefficient (Pearson's correlation)?</h4>
+            The correlation coefficient is a measure of the strength of a linear relationship between two variables. It tells us how closely two variables move together, but it does not explain why this movement occurs. Correlation analysis assumes that both variables being analyzed are independent variables, meaning that neither one causes the movement in the other. The correlation coefficient is denoted by the symbol ρ (pronounced rho) for a population and by the symbol r for a sample (Holmes, et. al., 2017). The correlation coefficient can be in the range of [-1, 1]:<br><br>
+            <ul>
+                <li>A correlation coefficient of -1 indicates a perfect negative linear relationship, where as one variable increases, the other decreases linearly.</li>
+                <li>A correlation coefficient of 0 indicates no linear relationship, meaning that the two variables do not move together in a linear manner.</li>
+                <li>A correlation coefficient of 1 indicates a perfect positive linear relationship, where as one variable increases, the other also increases linearly.</li>
+            </ul>
+            
+            The following snipet of code shows how to plot Pearson's correlation coefficient using python. It was taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex1%20covariance_pearson_correlation.ipynb">this jupyter notebook</a> in Unit 3.
+            <br><br>
+            
+            <figure>
+                <code>
+                    <span class="keyword">from</span> scipy.stats <span class="keyword">import</span> pearsonr<br>
+                    <span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt<br>
+                    <br>
+                    data1 <span class="keyword">=</span> 20 <span class="keyword">*</span> randn(1000) <span class="keyword">+</span> 100<br>
+                    data2 <span class="keyword">=</span> data1 <span class="keyword">+</span> (10 <span class="keyword">*</span> randn(1000) <span class="keyword">+</span> 50)<br>
+                    <br>
+                    <span class="comment"># calculate Pearson's correlation</span><br>
+                    corr, _ <span class="keyword">=</span> pearsonr(data1, data2)<br>
+                    <br>
+                    <span class="comment"># plot</span><br>
+                    plt.scatter(data1, data2)<br>
+                    plt.show()
+                    <br>
+                    <span class="comment"># Pearsons correlation: 0.888</span><br>
+                </code>
+                <figcaption class="image-caption">Code to calculate Pearson's correlation coefficient. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex1%20covariance_pearson_correlation.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+            </figure>
+
+            <figure>
+                <img src="../../images/ML/images/correlaion.png" alt="Correlation"/>
+                <figcaption class="image-caption">Correlation of two variables</figcaption>
+            </figure>
+
+            <h4>What is regression?</h4>
+            Regression is a statistical analysis technique used to find the relationship between an independent variable and one or more dependent variables (Montgomery, et. al., 2012).
+            In regression analysis, a regression model is built to estimate the parameters that describe the relationship between the variables.
+            <br><br>
+            References:
+            <code>
+                Holmes, A., Illowsky, B., Dean, S. (2017) Introductory Business Statistics. Houston, Texas. Available from https://openstax.org/books/introductory-business-statistics under a Creative Commons Attribution 4.0 International license (CC BY 4.0)
+                <br><br>
+                Montgomery, D.C., Peck, E.A., & Vining, G.G. (2012). Introduction to Linear Regression Analysis. John Wiley & Sons.
+            </code>
+        </p>
+    </body>
+</html>
+
