@@ -3330,3 +3330,34 @@ input, select, textarea {
 .text.left {
 	margin: 0em 0em 0em 3.5em;
 }
+
+.image-caption {
+	font-size: 14px;
+	color: #333;
+	text-align: center;
+  }
+  
+  code {
+	display: block;
+	padding: 10px; 
+	background-color: #000000;
+	border: 1px solid #ccc; 
+	border-radius: 4px; 
+	font-family: Consolas, Monaco, monospace;
+	font-size: 14px;
+	color: rgb(255, 255, 255);
+  }
+
+  code .keyword {
+	color: #03c400;
+	font-weight: bold;
+  }
+
+  code .comment {
+	color: #008000;
+	font-style: italic;
+  }
+
+  code .string {
+	color: #a90d91; /* Establece el color de las cadenas de texto */
+  }
