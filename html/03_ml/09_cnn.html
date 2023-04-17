@@ -31,13 +31,133 @@
 		</figure>
 <br>
 <br>
+
+		One of the most important features CNN can capture are edges. Using the correct filter, a convolutional layer of neurons can accurately extract edges from an 
+		image such as those in the figure below.
+		<br>
+		<br>
+		<figure>
+			<img src="../../images/ML/images/edges.png" alt="Edge detection"/>
+			<figcaption class="image-caption">Edge detection (Alibaba, 2017).</figcaption>
+		</figure>
+		<br>
+		<br>
+
+		<h3>Biased and wrong? Facial recognition tech in the dock</h3>
 		
-		<br><br>
-		References:
+		The main concerns in <a href="https://www.bbc.com/news/business-48842750">the article</a> are related to the ethical use of AI in facial recognition (FR) (Wall, 2019).
+		<br>
+		<br>
+
+	One of those concerns is the potential for bias in FR technology, particularly with race and gender. 
+	This raises concerns about the potential for discriminatory outcomes of civil liberties, especially for marginalized communities, 
+	because the FR systems are mainly trained with images of white people. This causes a high false matching among people with darker skin tones, 
+	especially in women, with a high error rate of being recognized as men.
+	<br>
+	<br>
+
+	Another concern is the need for more regulation and legal frameworks governing the use of FR technology. Some cities and organizations have 
+	banned or expressed concerns about using FR technology due to its imperfections and potential danger. However, others continue to try and use the 
+	technology. This highlights the need for regulations to ensure that FR technology is used fairly and ethically.
+	<br>
+	<br>
+
+	<h3>Convolutional Neural Network Design	for image classification using Keras</h3>
+	
+	Keras is a powerful open-source Python library used for building, training and evaluating deep learning models (Keras). It offers a wide range of methods
+	for data preparation tasks, such as image processing. Additionally, it supports several types of neural networks such as Convolutional Neural Networks.
+
+	The following architecture was presented in the final assignment of Unit 11 (Castro & Castro, 2023), following advices from Wang et al. (2020). In this arquitecture, we introduce
+	several types of layers, such as convolutional, max-pooling, batch normalization, dropout and dense layers.
+
+	<br>
+		<br>
+		<figure>
+			<img src="../../images/ML/images/cnn_arch.png" alt="CNN architecture"/>
+			<figcaption class="image-caption">CNN architecture using BatchNormalization and Dropout layers (Castro & Castro, 2023).</figcaption>
+		</figure>
+	
+	<br>
+	<br>
+		The architecture shown in the figure above lists the following layers.
+	<ul>
+		<li>Conv2D: Convolutional layer. This layer is used to extract important features such as edges and textures through convolution operations.</li>
+		<li>MaxPool2D: This layer reduces the dimensionality of the input data while keeping important features.</li>
+		<li>BatchNormalization: This layer normalizes the inputs of the layer to improve training stability.</li>
+		<li>Dropout: This layer randomly sets inputs to 0 based on a dropout rate. This reduces overfitting during training.</li>
+		<li>Flatter: This layer converts a data matrix into a vector.</li>
+		<li>Dense: This is a fully connected layer.</li>
+	</ul>
+
+	<h4>Building the model using python</h4>
+
+	The following is the piece of code we used to build this model in the assignment from Unit 11 (Castro & Castro, 2023).
+	<figure>
 		<code>
-			Sahah, S. (2018) A Comprehensive Guide to Convolutional Neural Networks — the ELI5 way. Available
-from: https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-theeli5-way-3bd2b1164a53 [Accessed 16 April 2023]
+			model = Sequential()<br>
+			model.add(Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=(32, 32, 3)))<br>
+			model.add(BatchNormalization())<br>
+			model.add(Conv2D(32, (3, 3), padding='same', activation='relu'))<br>
+			model.add(BatchNormalization())<br>
+			model.add(MaxPool2D(pool_size=(2, 2)))<br>
+			model.add(Dropout(0.2))<br>
+			<br>
+			model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))<br>
+			model.add(BatchNormalization())<br>
+			model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))<br>
+			model.add(BatchNormalization())<br>
+			model.add(MaxPool2D(pool_size=(2, 2)))<br>
+			model.add(Dropout(0.3))<br>
+			<br>
+			model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))<br>
+			model.add(BatchNormalization())<br>
+			model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))<br>
+			model.add(BatchNormalization())<br>
+			model.add(MaxPool2D(pool_size=(2, 2)))<br>
+			model.add(Dropout(0.4))<br>
+			<br>
+			model.add(Flatten())<br>
+			model.add(Dense(128, activation='relu'))<br>
+			model.add(BatchNormalization())<br>
+			model.add(Dropout(0.5))<br>
+			model.add(Dense(10, activation='softmax'))<br>
+			<br>
+			model.compile(loss='categorical_crossentropy',<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;optimizer='adam',<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;metrics=['accuracy'])<br>
+    return model
 		</code>
+		<figcaption class="image-caption">Building a convolutional neural network in python (Castro & Castro, 2023)</figcaption>
+	</figure>
+
+	<h4>Testing the model</h4>
+	After training our mode, the final result 
+
+	<figure>
+		<code>
+			index = 1400<br>
+			my_image = x_test[index]<br>
+			plt.imshow(my_image)<br>
+			<br>
+			prediction = np.argmax(model.predict(my_image.reshape(1, 32, 32, 3)), axis = -1)<br>
+			predictionIndex = prediction[0]<br>
+			print(predictionIndex)<br>
+			<br>
+			LABEL_NAMES = ['airplane', 'automobile','bird','cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']<br>
+			<br>
+			print(f'Predicted value: {LABEL_NAMES[predictionIndex]}')<br>
+			print(f'   Actual value: {LABEL_NAMES[y_test[index][0]]}')<br>
+		</code>
+		Output:
+		<code>
+			1/1 [==============================] - 0s 12ms/step<br>
+			5<br>
+			Predicted value: dog<br>
+			   Actual value: dog<br>
+		</code>
+		<img src="../../images/ML/images/cnn_dog.png" alt="Dog"/>
+		<figcaption class="image-caption">Testing the network (Castro & Castro, 2023)</figcaption>
+	</figure>
     </body>
 </html>
 

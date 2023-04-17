@@ -20,7 +20,7 @@
 		</p>
 
 		<h3>Similarity between data objects</h3>
-		To cluster groups in data, we need a way to find similarities among data objects. To find similarity between objects we ofter use distance (reference). <br>
+		To cluster groups in data, we need a way to find similarities among data objects. To find similarity between objects we often use distance. <br>
 		Two of the most important distance formulas are:
 		<ul>
 			<li>Euclidean Distance</li>
@@ -28,7 +28,7 @@
 		</ul>
 
 		<h4>Euclidean distance</h4>
-		The Euclidean distance gives us the distance between two points placed in an Euclidean space (reference). Assuming we have two points A and B, 
+		The Euclidean distance gives us the distance between two points placed in an Euclidean space (Myrianthous, 2022). Assuming we have two points A and B, 
 		and each point has two coordinates x and y, here's the formula to calculate the euclidean distance:
 		<code>
 			d = √[(xa - xb)^2 + (ya - yb)^2]
@@ -75,7 +75,7 @@
 
 		The following example was taken from the Unit 6 assignment. In this assignment we tried to find patterns in Airbnb data from New Yorck City. In this case, 
 		we are only considering properties in Manhattan and entire home or apartments as room type. <br>
-		Having a data frame with locations (latitude and longitude) and prices, we want to cluster those locations by price (reference).<br>
+		Having a data frame with locations (latitude and longitude) and prices, we want to cluster those locations by price (Castro et. al., 2023).<br>
 		<br>
 
 		<figure>
@@ -99,19 +99,19 @@
 				plt.xlabel(<span class="string">'Number of clusters'</span>)<br>
 				plt.ylabel(<span class="string">'Score'</span>)<br>
 			</code>
-			<figcaption class="image-caption">Code use the elbow technique. Code taken from the team assignment in Unit 6.</figcaption>
+			<figcaption class="image-caption">Code use the elbow technique. Code taken from the team assignment in Unit 6 (Castro et. al., 2023).</figcaption>
         </figure>
 
 		<figure>
 			<img src="../../images/ML/images/elobow.png" alt="The elbow technique"/>
-			<figcaption class="image-caption">The elbow techinque</figcaption>
+			<figcaption class="image-caption">The elbow techinque (Castro et. al., 2023).</figcaption>
 		</figure>
 
 		In the plot above, we observe that k = 2 is a proper number of clusters.<br><br>
 
 		<h4>K-Means in python</h4>
 
-		Once we have the proper number of clusters using the elbow method, let's review how to do that in Python. We will use the code submitted in Unit 6 (reference, 2023).
+		Once we have the proper number of clusters using the elbow method, let's review how to do that in Python. We will use the code submitted in Unit 6 (Castro et. al., 2023).
 
 		<br><br>
 		<figure>
@@ -211,12 +211,12 @@
 				  <td>0</td>
 				</tr>
 			</table>
-			<figcaption class="image-caption">Code to cluster locations by price. Code taken from the team assignment in Unit 6.</figcaption>
+			<figcaption class="image-caption">Code to cluster locations by price. Code taken from the team assignment in Unit 6 (Castro et. al., 2023).</figcaption>
         </figure>
 
 		<figure>
 			<img src="../../images/ML/images/clustering.png" alt="Clustered locations by price"/>
-			<figcaption class="image-caption">Clustered locations by price.</figcaption>
+			<figcaption class="image-caption">Clustered locations by price (Castro et. al., 2023).</figcaption>
 		</figure>
 
 		The two clusters are:
@@ -226,20 +226,12 @@
 		</ul>
 
 		We can observe i the figure below that the most expensive areas are located near touristic places such as the Empire State, 
-		the Brooklyn Brigde, the Statue of Liberty, Central Park etc (reference, 2023).
+		the Brooklyn Brigde, the Statue of Liberty, Central Park, among others (Castro et. al., 2023).
 
 		<figure>
 			<img src="../../images/ML/images/clusteringOnMap.png" alt="Clustered locations by price"/>
-			<figcaption class="image-caption">Clustered locations and touristic places shown in the map.</figcaption>
+			<figcaption class="image-caption">Clustered locations and touristic places shown in the map (Castro et. al., 2023).</figcaption>
 		</figure>
-
-		<br><br>
-		References:
-		<code>
-			Jain, A. K., Murty, M. N., & Flynn, P. J. (1999). Data clustering: a review. ACM Computing Surveys, 31(3), 264-323<br><br>
-			Han, J., Kamber, M., & Pei, J. (2011). Data mining: concepts and techniques. Morgan Kaufmann.<br><br>
-			Ketchen, D. J., & Shook, C. L. (1996). The application of cluster analysis in strategic management research: an analysis and critique. Strategic Management Journal, 17(6), 441-458.
-		</code>
     </body>
 </html>
 

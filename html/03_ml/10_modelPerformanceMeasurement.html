@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Model performance measurement</h3>
+		<p>
+			To measure the performance of our model we can check one of the following metrics
+			<ul>
+				<li>
+					Loss value: This is the value returned by the loss function used during training.
+				</li>
+				<li>
+					Accuracy: This is the number of correctly predicted instances divided by the total number of instances.
+				</li>
+			</ul>
+
+			Using the previous model, let's review how well it performed.
+			<br>
+			<br>
+			After training, we can have access to the model metrics that allows us to analyze its performance. These metrics look as follows (Castro & Castro, 2023).
+
+			<figure>
+				<table>
+					<tr>
+					  <th>index</th>
+					  <th>loss</th>
+					  <th>accuracy</th>
+					  <th>val_loss</th>
+					  <th>val_accuracy</th>
+					</tr>
+					<tr>
+					  <td>0</td>
+					  <td>1.666417</td>
+					  <td>0.428000</td>
+					  <td>1.137422</td>
+					  <td>0.5912</td>
+					</tr>
+					<tr>
+					  <td>1</td>
+					  <td>1.128188</td>
+					  <td>0.602775</td>
+					  <td>0.903420</td>
+					  <td>0.6777</td>
+					</tr>
+					<tr>
+					  <td>2</td>
+					  <td>0.946897</td>
+					  <td>0.670750</td>
+					  <td>0.941154</td>
+					  <td>0.6766</td>
+					</tr>
+					<tr>
+					  <td>3</td>
+					  <td>0.840693</td>
+					  <td>0.708575</td>
+					  <td>0.701448</td>
+					  <td>0.7519</td>
+					</tr>
+					<tr>
+					  <td>4</td>
+					  <td>0.773848</td>
+					  <td>0.732850</td>
+					  <td>0.702769</td>
+					  <td>0.7468</td>
+					</tr>
+					<tr>
+					  <td>5</td>
+					  <td>0.712827</td>
+					  <td>0.758900</td>
+					  <td>0.633178</td>
+					  <td>0.7769</td>
+					</tr>
+					<tr>
+					  <td>6</td>
+					  <td>0.656293</td>
+					  <td>0.774350</td>
+					  <td>0.635225</td>
+					  <td>0.7724</td>
+					</tr>
+					<tr>
+					  <td>7</td>
+					  <td>0.616626</td>
+					  <td>0.786750</td>
+					  <td>0.572124</td>
+					  <td>0.7994</td>
+					</tr>
+					<tr>
+					  <td>8</td>
+					  <td>0.576608</td>
+					  <td>0.801875</td>
+					  <td>0.539617</td>
+					  <td>0.8114</td>
+					</tr>
+					<tr>
+					  <td>9</td>
+					  <td>0.545574</td>
+					  <td>0.816025</td>
+					  <td>0.541707</td>
+					  <td>0.8146</td>
+					</tr>
+					<tr>
+					  <td>10</td>
+					  <td>0.519021</td>
+					  <td>0.821750</td>
+					  <td>0.545851</td>
+					  <td>0.8147</td>
+					</tr>
+				  </table>				  
+				<figcaption class="image-caption">Model metrics after training (Castro & Castro, 2023)</figcaption>
+			</figure>
+
+			Each of the rows is an epoch. We can observe that it has a loss, accuracy, val_loss and val_accuracy. The first two columns (loss and accuracy)
+			correspond to the training set and the following two (val_loss and val_accuracy) to the validation set, that contains unseen data. We can plot
+			those values to analyze how well the model is performing in the validation dataset.
+		</p>
+
+		<figure>
+			<img src="../../images/ML/images/performance_loss.png" alt="Training loss vs Validation loss"/>
+			<figcaption class="image-caption">Training loss vs Validation loss (Castro & Castro, 2023).</figcaption>
+		</figure>
+
+		<figure>
+			<img src="../../images/ML/images/performance_accuracy.png" alt="Training accuracy vs Validation accuracy"/>
+			<figcaption class="image-caption">Training accuracy vs Validation accuracy (Castro & Castro, 2023).</figcaption>
+		</figure>
+<br>
+<br>
+
+		From the figures avobe, we observe that the model is behaving as expected. Training and validation loss values look similar, which is a sign of low overfitting.
+		Additionally, the accuracy values in both datasets look similar as well. We can interpret that as a good ability of our model to generalize well on unseen data,
+		which is a sign of low overfitting (Castro & Castro, 2023).
+
+		<br>
+		<br>
+		<h4>Confusion matrix</h4>
+		Another technique we can use to visualize the performance of our model is the confusion matrix.
+		<br>
+		<br>
+		<figure>
+			<img src="../../images/ML/images/cmatrix.png" alt="Confusion matrix"/>
+			<figcaption class="image-caption">Confusion matrix (Castro & Castro, 2023).</figcaption>
+		</figure>
+		<br>
+		<br>
+		The figure above displays all the correctly classified values in the main diagonal. All other values are incorrectly predicted values.
+		The values in the x-axis are the predicted values and those in the y-axis are the true labels. For eample, values at (5, 3) means that there are
+		175 instances inscorrectly classified as class 5 when they are from class 3.
+    </body>
+</html>
+
