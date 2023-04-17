@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Convolutional Neural Networks</h3>
+		<p>
+			A convolutional neural network is a deep learning algorithm that is widely used in computer vision to classify images. These types of artificial 
+			neural networks are capable of learn patterns in the input images (textures and edges) and is able to differentiate one from another (Saha, 2018).
+			<br>
+			<br>
+
+			Unlike multi-level perceptrons, convolutional neural networks are specialized to work with grid data, such as images or videos. This is because it 
+			uses a mathematical operation called convolution that allows it to capture spatial and temporal dependencies (Saha, 2018).
+		</p>
+
+		<h4>Convolution</h4>
+		In the context on convolutional neural networks, the convolution is the mathematical operation used to extract patterns from input data, such as edges or 
+		textures. This is achieved by convoluting the input image with a kernel or filter. The kernel is a matrix of weights we use as a sliding window to 
+		move over the input image. On each location we multiply each value of the kernel ith the overlaped values from the input image and after thar we sum the results 
+		to get a single numerical value. After performing this operation over the whole input image, we get as result an matrix of numerical values called feature map.
+
+		<figure>
+			<img src="../../images/ML/images/convolution.png" alt="Gradient Descent"/>
+			<figcaption class="image-caption">Convolution (Saha, 2018).</figcaption>
+		</figure>
+<br>
+<br>
+		
+		<br><br>
+		References:
+		<code>
+			Sahah, S. (2018) A Comprehensive Guide to Convolutional Neural Networks — the ELI5 way. Available
+from: https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-theeli5-way-3bd2b1164a53 [Accessed 16 April 2023]
+		</code>
+    </body>
+</html>
+

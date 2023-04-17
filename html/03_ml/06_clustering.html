@@ -19,7 +19,30 @@
 			such as data analysis, pattern recognition, anomaly detection, and recommendation systems (Jain, 1999).
 		</p>
 
-		<h4>K-Means clustering</h4>
+		<h3>Similarity between data objects</h3>
+		To cluster groups in data, we need a way to find similarities among data objects. To find similarity between objects we ofter use distance (reference). <br>
+		Two of the most important distance formulas are:
+		<ul>
+			<li>Euclidean Distance</li>
+			<li>Jaccard Coefficient</li>
+		</ul>
+
+		<h4>Euclidean distance</h4>
+		The Euclidean distance gives us the distance between two points placed in an Euclidean space (reference). Assuming we have two points A and B, 
+		and each point has two coordinates x and y, here's the formula to calculate the euclidean distance:
+		<code>
+			d = √[(xa - xb)^2 + (ya - yb)^2]
+		</code>
+		Where:
+		<ul>
+			<li><strong>d</strong> is the distance we want to calculate.</li>
+			<li><strong>xa</strong> is the x coordinate of point A.</li>
+			<li><strong>xb</strong> is the x coordinate of point B.</li>
+			<li><strong>ya</strong> is the y coordinate of point A.</li>
+			<li><strong>yb</strong> is the y coordinate of point B.</li>
+		</ul>
+
+		<h3>K-Means clustering</h3>
 		<p>
 			K-means is a popular clustering algorithm in machine learning that aims to partition a dataset into k number of non-overlapping clusters based on 
 			the similarity of data points. It is an unsupervised learning method that assigns each data point to one of the k clusters based on the distance 
@@ -48,23 +71,33 @@
 			for k, where the decrease in variance or SSD levels off and adding more clusters does not significantly improve the clustering performance. The 
 			elbow point is often considered as the optimal number of clusters to use in the k-means algorithm for a given dataset.
 		</p>
+		<h4>The elbow method in python</h4>
+
+		The following example was taken from the Unit 6 assignment. In this assignment we tried to find patterns in Airbnb data from New Yorck City. In this case, 
+		we are only considering properties in Manhattan and entire home or apartments as room type. <br>
+		Having a data frame with locations (latitude and longitude) and prices, we want to cluster those locations by price (reference).<br>
 		<br>
 
 		<figure>
 			<code>
-				<span class="keyword">data</span> = <span class="keyword">zip</span>(mdf['latitude'], mdf['longitude']))<br>
-				<span class="keyword">max_k</span> = <span class="keyword">len</span>(data)<br>
+				<span class="comment"># manhattan df</span><br>
+				mdf = df[df[<span class="string">'neighbourhood_group_Manhattan'</span>] == 1]<br>
+				mdf = mdf[mdf[<span class="string">'room_type_Entire home/apt'</span>] == 1]<br>
+				mdf = mdf[[<span class="string">'price'</span>, <span class="string">'longitude'</span>, <span class="string">'latitude'</span>]]<br>
+				<br>
+				data = list(zip(mdf[<span class="string">'latitude'</span>], mdf[<span class="string">'longitude'</span>]))<br>
+				max_k = len(data)<br>
 				scores = []<br>
 				<br>
-				<span class="keyword">for</span> i in <span class="keyword">range</span>(1,20):<br>
+				for i in range(1, 20):<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;kmeans = KMeans(n_clusters=i)<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;kmeans.fit(data)<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;scores.append(kmeans.inertia_)<br>
 					<br>
-				plt.plot(range(1,20), scores, marker='o')<br>
-				plt.title('Elbow method')<br>
-				plt.xlabel('Number of clusters')<br>
-				plt.ylabel('Score')<br>
+				plt.plot(range(1, 20), scores, marker=<span class="string">'o'</span>)<br>
+				plt.title(<span class="string">'Elbow method'</span>)<br>
+				plt.xlabel(<span class="string">'Number of clusters'</span>)<br>
+				plt.ylabel(<span class="string">'Score'</span>)<br>
 			</code>
 			<figcaption class="image-caption">Code use the elbow technique. Code taken from the team assignment in Unit 6.</figcaption>
         </figure>
@@ -78,15 +111,17 @@
 
 		<h4>K-Means in python</h4>
 
+		Once we have the proper number of clusters using the elbow method, let's review how to do that in Python. We will use the code submitted in Unit 6 (reference, 2023).
+
 		<br><br>
 		<figure>
 			<code class="my-code">
 				kmeans = KMeans(n_clusters=2)<br>
 				ndata = mdf.copy()<br>
-				ndata[<span class="string">"cluster"</span>] = kmeans.fit_predict(ndata[["latitude", "longitude", "price"]])<br>
+				ndata[<span class="string">"cluster"</span>] = kmeans.fit_predict(ndata[[<span class="string">"latitude"</span>, <span class="string">"longitude"</span>, <span class="string">"price"</span>]])<br>
 				centroids = kmeans.cluster_centers_<br>
 				labels = kmeans.labels_<br>
-				colors = ["g","r",]<br>
+				colors = [<span class="string">"g"</span>, <span class="string">"r"</span>,]<br>
 				<br>
 				plt.scatter(<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;ndata[<span class="string">"latitude"</span>],<br>
@@ -105,7 +140,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;linewidths = 3,<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;zorder = 10<br>
 				)<br>
-				ndata[["latitude", "longitude", "price", "cluster"]].head(20)
+				ndata[[<span class="string">"latitude"</span>, <span class="string">"longitude"</span>, <span class="string">"price"</span>, <span class="string">"cluster"</span>]].head(20)
 			</code>
 			Output:
 			<table>
@@ -189,6 +224,14 @@
 			<li>Red (Cluster 0): expensive areas.</li>
 			<li>Green (Cluster 1): low-priced areas.</li>
 		</ul>
+
+		We can observe i the figure below that the most expensive areas are located near touristic places such as the Empire State, 
+		the Brooklyn Brigde, the Statue of Liberty, Central Park etc (reference, 2023).
+
+		<figure>
+			<img src="../../images/ML/images/clusteringOnMap.png" alt="Clustered locations by price"/>
+			<figcaption class="image-caption">Clustered locations and touristic places shown in the map.</figcaption>
+		</figure>
 
 		<br><br>
 		References:

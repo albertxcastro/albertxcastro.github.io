@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Introduction to Artificial Neural Networks</h3>
+		<p>
+			The artificial neural network is a mathematical model inspired by human neural networks. Each artificial neural network is composed by a set of 
+			single units called neurons that are interconnected to other neurons to build more complex structures. Each neuron has a weight value that 
+			defines the classification behavior of the network. In machine learning, we use the training stage to find the correct weight values of these neurons 
+			in order to build a neural network with a good classification behavior (Miroslav, 2021).
+		</p>
+
+		<h4>Perceptron</h4>
+
+		The perceptron was invented by Frank Rosenblatt in 1957. It is the simplest unit in a neural network, thus it is a neuron. It is a binary classification
+		algorithm that consists of inputs, weight and bias values, and a step function that maps the output value to a range of 0, 1 or -1, 1 (reference).
+
+		This is a supervised learning algorithm, which means that we use previously labelled data to train the model. As we described in the introduction point, 
+		during training, we aim to adjust the weight values and bias values  of the neuron (in this case the perceptron) based on the error or difference between 
+		the predicted value and the actual value. The goal is to minimize the error to find the optimal weights and biases that can classify correctly unseen data.
+		
+		<figure>
+			<img src="../../images/ML/images/perceptron.png" alt="Perceptron"/>
+			<figcaption class="image-caption">The perceptron</figcaption>
+		</figure>
+
+		<h4>Single perceptron in Python</h4>
+
+		This is a resumed version of the <a href="https://www.my-course.co.uk/pluginfile.php/891224/mod_page/content/4/Unit07%20Ex1%20simple_perceptron.ipynb">code 
+			provided</a> in Unit 7. The author of this snipet of code is Dr. Mike Lakoju. In it, he explains how to build a simple perceptron model using numpy.
+
+			<figure>
+                <code>
+					import numpy as np<br>
+					inputs = np.array([45, 25])<br>
+					weights = np.array([0.7, 0.1])<br>
+					<br>
+					def sum_func(inputs, weights):<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;return inputs.dot(weights)<br>
+					<br>
+					sum_function_value = sum_func(inputs, weights)<br>
+					<br>
+					def step_function(sum_func):<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;if(sum_func >= 1):<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f'The Sum Function is greater than or equal to 1'</span>)<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f'The Sum Function is NOT greater'</span>)<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>
+					<br>
+					step_function(sum_function_value)
+				</code>	
+					Output:
+				<code>
+					The Sum Function is greater than or equal to 1<br>
+					1
+				</code>
+                <figcaption class="image-caption">Code to calculate Pearson's correlation coefficient. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891189/mod_page/content/4/Unit03%20Ex1%20covariance_pearson_correlation.ipynb">this jupyter notebook</a> in Unit 3.</figcaption>
+            </figure>
+
+			From the code above, we can see the <strong>sum_func</strong> that represents the neuron (or perceptron). It makes a dot product between the inputs and 
+			weights, and the result is passed to the <strong>step_function</strong>, which act as the activation function. In this case the step function returns 1 
+			if the input is equals or greater than 1 otherwise it returns 0. Given the fact that this model only returns two values, we can state that it is a 
+			binary classifier.
+			<br>
+			<br>
+		<h4>Multilayer perceptron</h4>
+
+		<figure>
+			<img src="../../images/ML/images/multilayerPerceptron.png" alt="Perceptron"/>
+			<figcaption class="image-caption">Multilayer perceptron</figcaption>
+		</figure>
+
+		There is a representation if a multilayer perceptron in the figure above. The network has three separated layers: an input layer, a hidden layer and an 
+		output layer. This is the simplest representation of a multilayer perceptron network, but in real world applications, we can have any number of hidden layers 
+		depending on the nature of the data we want to classify (Miroslav, 2021).
+
+		<br>
+
+		Neurons from the same layer do not communicate between them, but they are fully connected to networks from the next layer. A connection between neurons 
+		from adjacent layers is associated with a weight value (Miroslav, 2021), used to adjust the classification behavior.
+		<br><br>
+
+		During training, to update the weights to their optimal values, we use an algorithm called backpropagation, which will be discussed in next sections of this 
+		e-porfolio.
+
+
+
+		<br><br>
+		References:
+		<code>
+			Miroslav, K. (2021) An Introduction to Machine Learning. 3rd Ed. Springer.<br><br>
+		</code>
+    </body>
+</html>
+

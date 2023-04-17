@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Backpropagation in ANNs</h3>
+		<p>
+			Remember that the classification behavior in a neural network is based on their neurons' weights, and because of that, we have to find the optimal 
+			set of weights to allow our network to have a good classification behavior (Miroslav, 2021).
+			<br>
+			<br>
+
+			To explain how and when the backpropagation step is performed, we need to understand how the training process works first.
+		</p>
+
+		<h4>The training process</h4>
+		Before we train the network, we initialize their neurons' weights with random data, tipically with numbers in the range of [-0.1, 0.1] (Miroslav, 2021).
+		Additionally, we must keep in mind that we need to set a number of epochs (the number of times we will pass the whole training dataset into out network) to train our
+		neural network.
+<br>
+<br>
+		The training process can be described following the steps listed below.
+		<ol>
+			<li><strong>Feedforward:</strong> The training instances are passed one by one to the network, which will give us a predicted class in the output layer.</li>
+			<li><strong>Loss (error) calculation:</strong> The predicted output is compared to the actual class label. The error is the difference between these two values. The error
+				help us to measure how well the network is performing on the presented input instance. This is what we call the <strong>Mean Squared Error (MSE)</strong>. 
+			</li>
+			<li><strong>Backpropagation:</strong> After the epoch finishes, we have to propagate the loss value from the output layer to the input layer to update the set 
+				of weight values. Here is where we calculate the gradient value, that is the derivative of the loss with respect to the output of each neuron in the network (Miroslav, 2021).
+			</li>
+			<li><strong>Weight update:</strong> After we calculated the gradient of the loss with respect to the output of each neuron, we update the weights of the neurons 
+				using an optimization algorithm such as the gradient descent. The goal of the gradient descent is to minimize the loss value by updating the weights. The weight 
+				update rate is controlled by a hyperparameter called learning rate, which is the size of the step size of the update.
+			</li>
+			<li><strong>Repetition:</strong> Steps 1 to 4 are repeated fo each epoch until convergence is reached in the loss value (it does not improve anymore in future iterations).</li>
+		</ol>
+
+		<h4>Gradient descent</h4>
+
+		The following figure taken from Miroslav's (2021) work helps us understand the purpose of the gradient descent.
+		<figure>
+			<img src="../../images/ML/images/gradientDescent.png" alt="Gradient Descent"/>
+			<figcaption class="image-caption">MSE vs weight values</figcaption>
+		</figure>
+
+		The verical values are the MSE and the horizontal axes are the weights (Miroslav, 2021). The goal of the gradient descent algorithm is to find the local 
+		minimum that represents the minimum loss value. When this value is found, we see at the weight values that are related to that value in the function and 
+		propagate them in the neurons. In other words, we have found the best weight values where the MSE value is very low so we want to tell the network to use those
+		new weights by doing the back propagation process to update the set of weights in the network.
+		<br>
+		<br>
+
+		<h4>Gradient descent in Python</h4>
+
+		This is a modified version of the <a href="https://www.my-course.co.uk/pluginfile.php/891236/mod_page/content/16/Unit08%20Ex4%20gradient_descent_cost_function.ipynb">code 
+			provided</a> in Unit 8. We modified it to plot the loss value on each iteration and using different learning rates, to show how large learning rate values can lead to 
+			miss the global minimum of the function
+
+			<figure>
+				<code>
+					import numpy as np<br>
+					import matplotlib.pyplot as plt<br>
+					import pandas as pd<br>
+					<br>
+					def gradient_descent(x, y):<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;m_curr = b_curr = 0<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;iterations = 50 <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;n = len(x)<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;learning_rate = 0.08<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;values = []<br>
+						<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;for i in range(iterations):<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d = {}<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y_predicted = m_curr * x + b_curr<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cost = (1/n) * sum([val**2 for val in (y-y_predicted)])<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;md = -(2/n)*sum(x*(y-y_predicted))<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bd = -(2/n)*sum(y-y_predicted)<br>
+						
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d['iteration'] = i<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d['cost'] = cost<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values.append(d)<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;return values<br>
+						<br>
+					x = np.array([1,2,3,4,5])<br>
+					y = np.array([5,7,9,11,13])<br>
+					<br>
+					data = gradient_descent(x, y)<br>
+					df = pd.DataFrame(data)<br>
+					plt.scatter(df.iteration, df.cost)<br>
+					plt.xlabel('<span class="keyword">Iteration</span>')<br>
+					plt.ylabel('<span class="keyword">Cost</span>')<br>
+				</code>
+                <figcaption class="image-caption">Gradient descent in Python. Code taken from <a href="https://www.my-course.co.uk/pluginfile.php/891236/mod_page/content/16/Unit08%20Ex4%20gradient_descent_cost_function.ipynb">this jupyter notebook</a> in Unit 8.</figcaption>
+            </figure>
+
+			Using <strong>50</strong> iterations and a learning rate of <strong>0.08</strong> properly reduces the cost function as we can see in the following figure.
+			<br>
+			<br>
+
+		<figure>
+			<img src="../../images/ML/images/grad1.png" alt="learning rate = 0.08"/>
+			<figcaption class="image-caption">Gradient descent with learning rate = 0.08</figcaption>
+		</figure>
+
+		If we update the learning rate, with a larger value (let's use 0.1), we can see how the gradient descent function fails to find the minimum cost value.
+
+		<figure>
+			<img src="../../images/ML/images/grad2.png" alt="learning rate = 0.1"/>
+			<figcaption class="image-caption">Gradient descent with learning rate = 0.1</figcaption>
+		</figure>
+
+		<br><br>
+		References:
+		<code>
+			Miroslav, K. (2021) An Introduction to Machine Learning. 3rd Ed. Springer.<br><br>
+		</code>
+    </body>
+</html>
+
