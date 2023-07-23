@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Collaborative Discussion 2: Agent Communication Languages - Initial Post</h3>
+		After reading about ACLs (Agent communication Languages) such as the KQML (Knowledge Query and Manipulation Language), I'd like to list some of the differences, advantages, and disadvantages I see compared to object-oriented languages based on my experience (after working with languages such as Java, C#, Kotlin, and Python from the last decade).
+		<ol>
+			<li>
+				Agents are decoupled from other agents. It means that an agent does not need to know the implementation details of other agents. They only need to agree on a communication protocol to interchange data to cooperate or negotiate to achieve their goal. On the other hand, method invocation can occur only in the same language in most cases (there are exceptions, like Java and Kotlin, where both run on the Java Virtual Machine and can be used interchangeably, or C#/Python/Java and C, but that requires an extra step of adding a native interface and is worth mentioning that C is not an object-oriented language).
+			</li>
+			<li>
+				ACLs offer rich messages. While many method invocations can only handle calls with explicit parameters (objects or primitive values), ACLs allow agents to interchange complex messages they can use to share knowledge, share needs, cooperate to solve a common problem, or negotiate (Finin et al., 1993).
+			</li>
+			<li>
+				ACLs allow flexible communication channels. Most ACLs enable agents to communicate with different paradigms, such as request-response (for synchronous communication), event notification (for asynchronous communication), or broadcast messages (Finin et al., 1993). Many object-oriented languages offer asynchronous programming techniques, but in most cases, the async methods must be in the same main program, which is not a truly distributed experience. It might have some trade-offs, such as bug fixing. It is way easier to fix bugs in code that is not distributed than trying to find a bug in agents that are separated.
+			</li>
+		</ol>
+		Since we are only comparing method invocation in the same program, we can see many advantages with ACLs. However, distributed systems (using the object-oriented paradigm) can also handle the points above, but developers must use frameworks. For example, in modern implementations, two systems written in different languages can communicate if they implement an API and use a common language, such as JSON, or use asynchronous communication by using a queue.
+		<br>
+		Additionally, I imagine ACLs face problems like traditional distributed systems, such as scalability, maintainability, or even communication issues between agents. However, ACLs are designed to share complex messages between agents with different goals and can't just send a fixed set of messages, such as in method invocation.
+		<br>
+		<br>
+
+		References
+		<br>
+
+		Finin, T., Weber, J., Wiederhold, G., Genesereth, M., Fritzson, R., McKay, D., McGuire, J., Pelavin, R., Shapiro, S. and Beck, C., 1993. Specification of the KQML agent-communication. Darpa Knowledge Sharing Effort.
+    </body>
+</html>
+
