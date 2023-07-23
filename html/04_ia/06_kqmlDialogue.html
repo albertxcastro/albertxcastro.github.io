@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Alberto Castro</title>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+        <h3>Creating Agent Dialogues</h3>
+		Create an agent dialogue, using KQML and KIF, between two agents (named Alice and Bob).
+<br>
+<br>
+		Alice is an agent designed to procure stock and Bob is an agent that controls the stock levels for a warehouse. This dialogue should see Alice asking Bob about the available stock of 50 inch televisions, and also querying the number of HDMI slots the televisions have.
+		<br>
+		<br>
+
+		The solution can be found in this <a href="https://github.com/albertxcastro/SuperSimpleKQMLDIalogue/tree/main">GitHub repo</a>
+		<br>
+		<br>
+		The solution implements a super class <strong>Agent</strong> and two derived classes <strong>Bob</strong> and <strong>Alice</strong>.
+	In the main script, both agents are instantiated and also injected a message queue they use for asynchronous communication.
+		<br>
+		<br>
+		<span class="image center"><img src="../../images/IA/alice-bob-code.png"></span>
+		<span class="image center"><img src="../../images/IA/alice-bob-terminal.png"></span>
+		<br>
+		Additionally, <strong>Bob</strong> is injected its knowledge base of televisions that represents the stock, and also messages
+		between agents are set up.
+		<br>
+		I tried to follow an object-oriented design to simplify the code. After executing the code, this is the output.
+
+
+	</body>
+</html>
+
